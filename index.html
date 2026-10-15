@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movie Booking Website</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =========================
+         CSS START
+    ========================== -->
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+
+        /* =========================
+           BODY
+        ========================== */
+
+        body {
+            background: #f2f2f2;
+            color: #222;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            background: #d81f26;
+            padding: 15px 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: white;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            font-size: 30px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+
+        /* SEARCH */
+
+        .search {
+            width: 40%;
+        }
+
+
+        .search input {
+            width: 100%;
+
+            padding: 12px 20px;
+
+            border: none;
+            border-radius: 30px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+
+        /* CITY */
+
+        .city select {
+            padding: 10px 15px;
+
+            border: none;
+            border-radius: 6px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           BANNER
+        ========================== */
+
+        .banner {
+            height: 420px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.45),
+                    rgba(0, 0, 0, 0.45)
+                ),
+                url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+
+        .banner h1 {
+            color: white;
+
+            font-size: 55px;
+
+            background: rgba(0, 0, 0, 0.55);
+
+            padding: 20px 40px;
+
+            border-radius: 10px;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================== */
+
+        .container {
+            width: 92%;
+
+            max-width: 1400px;
+
+            margin: auto;
+
+            padding: 40px 0;
+        }
+
+
+        .container > h2 {
+            margin-bottom: 25px;
+
+            font-size: 34px;
+        }
+
+
+        /* =========================
+           MOVIE GRID
+        ========================== */
+
+        .movies {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 25px;
+        }
+
+
+        /* =========================
+           MOVIE CARD
+        ========================== */
+
+        .card {
+            background: white;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.15);
+
+            transition: 0.3s;
+        }
+
+
+        .card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .card img {
+            width: 100%;
+
+            height: 330px;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        .card-content {
+            padding: 15px;
+        }
+
+
+        .card h3 {
+            margin-bottom: 10px;
+
+            font-size: 22px;
+        }
+
+
+        .card p {
+            color: #555;
+
+            margin: 5px 0;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .btns {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+
+        button {
+            flex: 1;
+
+            padding: 10px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+
+        .trailer {
+            background: #111;
+
+            color: white;
+        }
+
+
+        .book {
+            background: #d81f26;
+
+            color: white;
+        }
+
+
+        /* =========================
+           BOOKING SECTION
+        ========================== */
+
+        .booking {
+            display: none;
+
+            background: white;
+
+            margin-top: 50px;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .booking h2 {
+            margin-bottom: 20px;
+
+            font-size: 30px;
+        }
+
+
+        .booking label {
+            display: block;
+
+            margin-top: 10px;
+
+            font-weight: 500;
+        }
+
+
+        .booking input,
+        .booking select {
+            width: 100%;
+
+            padding: 12px;
+
+            margin: 8px 0 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        .booking input:focus,
+        .booking select:focus {
+            border-color: #d81f26;
+        }
+
+
+        /* =========================
+           PAYMENT
+        ========================== */
+
+        .payment {
+            display: none;
+
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #ddd;
+        }
+
+
+        .payment h2 {
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #111;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 60px;
+        }
+
+
+        footer h2 {
+            margin-bottom: 8px;
+        }
+
+
+        footer p {
+            color: #ccc;
+
+            margin: 5px 0;
+        }
+
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            header {
+                padding: 15px 25px;
+
+                flex-wrap: wrap;
+
+                gap: 15px;
+            }
+
+
+            .search {
+                width: 100%;
+
+                order: 3;
+            }
+
+
+            .banner h1 {
+                font-size: 40px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            header {
+                justify-content: center;
+
+                text-align: center;
+            }
+
+
+            .logo {
+                font-size: 25px;
+            }
+
+
+            .banner {
+                height: 300px;
+            }
+
+
+            .banner h1 {
+                font-size: 28px;
+
+                padding: 15px 20px;
+            }
+
+
+            .container {
+                width: 90%;
+            }
+
+
+            .container > h2 {
+                font-size: 28px;
+            }
+
+
+            .btns {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+    <!-- =========================
+         CSS END
+    ========================== -->
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="logo">
+            🎬 MovieHub
+        </div>
+
+
+        <div class="search">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search Movies..."
+            >
+
+        </div>
+
+
+        <div class="city">
+
+            <select id="city">
+
+                <option>Hyderabad</option>
+
+                <option>Vijayawada</option>
+
+                <option>Visakhapatnam</option>
+
+                <option>Bengaluru</option>
+
+                <option>Chennai</option>
+
+            </select>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         BANNER
+    ========================== -->
+
+    <div class="banner">
+
+        <h1>
+            Book Your Favourite Movies
+        </h1>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <div class="container">
+
+        <h2>
+            Now Showing
+        </h2>
+
+
+        <!-- =========================
+             MOVIE GRID
+        ========================== -->
+
+        <div class="movies">
+
+
+            <!-- =========================
+                 MOVIE 1
+            ========================== -->
+
+            <div class="card">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwBYyht1wcpCKbMjxThtGUqy4aj-TLRhmfWlEwmhGqJg&s=10"
+                    alt="Varanasi"
+                >
+
+
+                <div class="card-content">
+
+                    <h3>
+                        Varanasi
+                    </h3>
+
+                    <p>
+                        ⭐ 10
+                    </p>
+
+                    <p>
+                        Action | Pan India
+                    </p>
+
+
+                    <div class="btns">
+
+                        <button
+                            class="trailer"
+                            onclick="window.open('https://youtu.be/DMD2uthghWE?si=8QQQ8t53kYmXb4gY', '_blank')"
+                        >
+                            Trailer
+                        </button>
+
+
+                        <button
+                            class="book"
+                            onclick="bookMovie('Varanasi')"
+                        >
+                            Book
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 MOVIE 2
+            ========================== -->
+
+            <div class="card">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4YGCnkTtV49bbp3cvYc49Ey5eGTWksbZa1ieNrQwxmg&s=10"
+                    alt="Spirit"
+                >
+
+
+                <div class="card-content">
+
+                    <h3>
+                        Spirit
+                    </h3>
+
+                    <p>
+                        ⭐ 10
+                    </p>
+
+                    <p>
+                        Action | Pan India
+                    </p>
+
+
+                    <div class="btns">
+
+                        <button
+                            class="trailer"
+                            onclick="window.open('https://youtu.be/VCGVPiD4BP0?si=fefdwmAZgczMHzEV', '_blank')"
+                        >
+                            Trailer
+                        </button>
+
+
+                        <button
+                            class="book"
+                            onclick="bookMovie('Spirit')"
+                        >
+                            Book
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 MOVIE 3
+            ========================== -->
+
+            <div class="card">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7bNUPAelmq23CaeLeceaik6jpX75ePpWoEICH4fgdvQ&s=10"
+                    alt="Pushpa 2"
+                >
+
+
+                <div class="card-content">
+
+                    <h3>
+                        Pushpa 2
+                    </h3>
+
+                    <p>
+                        ⭐ 9.4
+                    </p>
+
+                    <p>
+                        Action | Telugu
+                    </p>
+
+
+                    <div class="btns">
+
+                        <button
+                            class="trailer"
+                            onclick="window.open('https://youtu.be/g3JUbgOHgdw?si=CqrbHRUqUcQB7z6X', '_blank')"
+                        >
+                            Trailer
+                        </button>
+
+
+                        <button
+                            class="book"
+                            onclick="bookMovie('Pushpa 2')"
+                        >
+                            Book
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 MOVIE 4
+            ========================== -->
+
+            <div class="card">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfma9A04SC1Bx7MUMTaPJ53L9N4rpVg7oOyyScMrKWAA&s=10"
+                    alt="OG"
+                >
+
+
+                <div class="card-content">
+
+                    <h3>
+                        OG
+                    </h3>
+
+                    <p>
+                        ⭐ 9.3
+                    </p>
+
+                    <p>
+                        Sci-Fi | Telugu
+                    </p>
+
+
+                    <div class="btns">
+
+                        <button
+                            class="trailer"
+                            onclick="window.open('https://youtu.be/_8J8LwoVH_0?si=ozCBFfwQxec-PFDh', '_blank')"
+                        >
+                            Trailer
+                        </button>
+
+
+                        <button
+                            class="book"
+                            onclick="bookMovie('OG')"
+                        >
+                            Book
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 MOVIE 5
+            ========================== -->
+
+            <div class="card">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTisT7q1Mz65FWAmZu-4m0X8pU2eSDWffCFkZpa0d29ZA&s=10"
+                    alt="Devara"
+                >
+
+
+                <div class="card-content">
+
+                    <h3>
+                        Devara
+                    </h3>
+
+                    <p>
+                        ⭐ 9.0
+                    </p>
+
+                    <p>
+                        Action | Telugu
+                    </p>
+
+
+                    <div class="btns">
+
+                        <button
+                            class="trailer"
+                            onclick="window.open('https://youtu.be/HZ_Q20ir-gg?si=sXNsmLLHGXLj9u8_', '_blank')"
+                        >
+                            Trailer
+                        </button>
+
+
+                        <button
+                            class="book"
+                            onclick="bookMovie('Devara')"
+                        >
+                            Book
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             BOOKING FORM
+        ========================== -->
+
+        <div
+            class="booking"
+            id="booking"
+        >
+
+            <h2>
+                Book Tickets
+            </h2>
+
+
+            <!-- MOVIE -->
+
+            <label>
+                Movie
+            </label>
+
+            <input
+                type="text"
+                id="movieName"
+                readonly
+            >
+
+
+            <!-- DATE -->
+
+            <label>
+                Select Date
+            </label>
+
+            <input
+                type="date"
+                id="date"
+            >
+
+
+            <!-- TIME -->
+
+            <label>
+                Select Time
+            </label>
+
+            <select id="time">
+
+                <option>10:00 AM</option>
+
+                <option>1:00 PM</option>
+
+                <option>4:00 PM</option>
+
+                <option>7:00 PM</option>
+
+                <option>10:00 PM</option>
+
+            </select>
+
+
+            <!-- THEATRE -->
+
+            <label>
+                Select Theatre
+            </label>
+
+            <select id="theatre">
+
+                <option>PVR Cinemas</option>
+
+                <option>INOX</option>
+
+                <option>AMB Cinemas</option>
+
+                <option>Cinepolis</option>
+
+            </select>
+
+
+            <!-- TICKETS -->
+
+            <label>
+                Tickets
+            </label>
+
+            <select id="tickets">
+
+                <option value="1">1</option>
+
+                <option value="2">2</option>
+
+                <option value="3">3</option>
+
+                <option value="4">4</option>
+
+                <option value="5">5</option>
+
+            </select>
+
+
+            <!-- SEAT -->
+
+            <label>
+                Select Seat
+            </label>
+
+            <select id="seat">
+
+                <option>A1</option>
+
+                <option>A2</option>
+
+                <option>A3</option>
+
+                <option>B1</option>
+
+                <option>B2</option>
+
+                <option>B3</option>
+
+                <option>C1</option>
+
+                <option>C2</option>
+
+            </select>
+
+
+            <!-- PAYMENT BUTTON -->
+
+            <button
+                class="book"
+                style="margin-top:20px;width:100%;"
+                onclick="showPayment()"
+            >
+                Continue to Payment
+            </button>
+
+
+            <!-- =========================
+                 PAYMENT FORM
+            ========================== -->
+
+            <div
+                class="payment"
+                id="payment"
+            >
+
+                <h2>
+                    Payment
+                </h2>
+
+
+                <!-- NAME -->
+
+                <label>
+                    Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Enter Name"
+                >
+
+
+                <!-- CARD NUMBER -->
+
+                <label>
+                    Card Number
+                </label>
+
+                <input
+                    type="text"
+                    id="cardNumber"
+                    placeholder="1234 5678 9012 3456"
+                >
+
+
+                <!-- EXPIRY -->
+
+                <label>
+                    Expiry
+                </label>
+
+                <input
+                    type="month"
+                    id="expiry"
+                >
+
+
+                <!-- CVV -->
+
+                <label>
+                    CVV
+                </label>
+
+                <input
+                    type="password"
+                    id="cvv"
+                    maxlength="3"
+                    placeholder="Enter CVV"
+                >
+
+
+                <!-- PAY NOW -->
+
+                <button
+                    class="book"
+                    style="width:100%;margin-top:20px;"
+                    onclick="confirmBooking()"
+                >
+                    Pay Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <h2>
+            MovieHub
+        </h2>
+
+        <p>
+            Book Movie Tickets Anytime Anywhere
+        </p>
+
+        <p>
+            © 2026 MovieHub
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* =========================
+           BOOK MOVIE
+        ========================== */
+
+        function bookMovie(name) {
+
+            const booking =
+                document.getElementById("booking");
+
+            const movieName =
+                document.getElementById("movieName");
+
+
+            booking.style.display = "block";
+
+            movieName.value = name;
+
+
+            booking.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        /* =========================
+           SHOW PAYMENT
+        ========================== */
+
+        function showPayment() {
+
+            const movie =
+                document.getElementById("movieName").value;
+
+            const date =
+                document.getElementById("date").value;
+
+
+            if (movie === "") {
+
+                alert("Please select a movie first.");
+
+                return;
+            }
+
+
+            if (date === "") {
+
+                alert("Please select a date.");
+
+                return;
+            }
+
+
+            document.getElementById("payment").style.display =
+                "block";
+
+
+            document.getElementById("payment").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        /* =========================
+           CONFIRM BOOKING
+        ========================== */
+
+        function confirmBooking() {
+
+            const movie =
+                document.getElementById("movieName").value;
+
+            const date =
+                document.getElementById("date").value;
+
+            const time =
+                document.getElementById("time").value;
+
+            const theatre =
+                document.getElementById("theatre").value;
+
+            const tickets =
+                document.getElementById("tickets").value;
+
+            const seat =
+                document.getElementById("seat").value;
+
+            const name =
+                document.getElementById("customerName").value;
+
+            const card =
+                document.getElementById("cardNumber").value;
+
+            const expiry =
+                document.getElementById("expiry").value;
+
+            const cvv =
+                document.getElementById("cvv").value;
+
+
+            /* VALIDATION */
+
+            if (name.trim() === "") {
+
+                alert("Please enter your name.");
+
+                return;
+            }
+
+
+            if (card.trim() === "") {
+
+                alert("Please enter your card number.");
+
+                return;
+            }
+
+
+            if (expiry === "") {
+
+                alert("Please select card expiry.");
+
+                return;
+            }
+
+
+            if (cvv.trim() === "") {
+
+                alert("Please enter CVV.");
+
+                return;
+            }
+
+
+            /* SUCCESS */
+
+            alert(
+                "🎉 Booking Successful!\n\n" +
+
+                "Movie: " + movie +
+
+                "\nDate: " + date +
+
+                "\nTime: " + time +
+
+                "\nTheatre: " + theatre +
+
+                "\nTickets: " + tickets +
+
+                "\nSeat: " + seat +
+
+                "\n\nThank you for booking with MovieHub!"
+            );
+
+
+            /* CLEAR FORM */
+
+            document.getElementById("movieName").value = "";
+
+            document.getElementById("date").value = "";
+
+            document.getElementById("customerName").value = "";
+
+            document.getElementById("cardNumber").value = "";
+
+            document.getElementById("expiry").value = "";
+
+            document.getElementById("cvv").value = "";
+
+
+            /* HIDE SECTIONS */
+
+            document.getElementById("payment").style.display =
+                "none";
+
+            document.getElementById("booking").style.display =
+                "none";
+
+
+            /* GO TO TOP */
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================
+           SEARCH MOVIES
+        ========================== */
+
+        const search =
+            document.getElementById("search");
+
+
+        search.addEventListener("keyup", function () {
+
+            const value =
+                search.value.toLowerCase().trim();
+
+
+            const cards =
+                document.querySelectorAll(".card");
+
+
+            cards.forEach(function (card) {
+
+                const title =
+                    card
+                        .querySelector("h3")
+                        .innerText
+                        .toLowerCase();
+
+
+                if (title.includes(value)) {
+
+                    card.style.display = "";
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

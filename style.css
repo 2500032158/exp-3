@@ -1,0 +1,724 @@
+/* =====================================================
+   BASIC RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f7;
+    color: #222;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+    width: 100%;
+    min-height: 70px;
+
+    background: linear-gradient(
+        135deg,
+        #e50914,
+        #b20710
+    );
+
+    padding: 14px 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    color: white;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+/* LOGO */
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search {
+    width: 40%;
+}
+
+.search input {
+    width: 100%;
+    height: 44px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 30px;
+    outline: none;
+
+    font-size: 15px;
+    color: #333;
+    background: white;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
+    transition: 0.3s;
+}
+
+.search input:focus {
+    box-shadow:
+        0 0 0 3px rgba(255, 255, 255, 0.3),
+        0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.search input::placeholder {
+    color: #999;
+}
+
+
+/* =====================================================
+   CITY DROPDOWN
+===================================================== */
+
+.city select {
+    padding: 10px 15px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: white;
+    color: #333;
+
+    font-size: 14px;
+
+    cursor: pointer;
+    outline: none;
+}
+
+
+/* =====================================================
+   HERO / BANNER
+===================================================== */
+
+.banner {
+    height: 430px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.75)
+        ),
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* BANNER TEXT */
+
+.banner h1 {
+    color: white;
+
+    font-size: clamp(30px, 5vw, 58px);
+    font-weight: 700;
+
+    padding: 25px 45px;
+
+    border-radius: 15px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(5px);
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+
+    animation: fadeIn 1s ease;
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.container {
+    width: 92%;
+    max-width: 1450px;
+
+    margin: auto;
+    padding: 55px 0;
+}
+
+
+/* SECTION TITLE */
+
+.container h2 {
+    font-size: 32px;
+    font-weight: 700;
+
+    margin-bottom: 30px;
+
+    color: #222;
+
+    position: relative;
+}
+
+
+/* RED LINE UNDER TITLE */
+
+.container h2::after {
+    content: "";
+
+    display: block;
+
+    width: 60px;
+    height: 4px;
+
+    background: #e50914;
+
+    border-radius: 10px;
+
+    margin-top: 8px;
+}
+
+
+/* =====================================================
+   MOVIE GRID
+===================================================== */
+
+.movies {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
+
+    gap: 28px;
+}
+
+
+/* =====================================================
+   MOVIE CARD
+===================================================== */
+
+.card {
+    background: white;
+
+    border-radius: 16px;
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+    position: relative;
+}
+
+
+/* CARD HOVER */
+
+.card:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =====================================================
+   MOVIE IMAGE
+===================================================== */
+
+.card img {
+    width: 100%;
+    height: 350px;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+
+/* IMAGE ZOOM */
+
+.card:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
+
+.card-content {
+    padding: 18px;
+}
+
+
+/* MOVIE NAME */
+
+.card h3 {
+    font-size: 20px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    text-transform: capitalize;
+    color: #222;
+}
+
+
+/* MOVIE DETAILS */
+
+.card p {
+    color: #666;
+
+    font-size: 14px;
+
+    margin: 6px 0;
+}
+
+
+/* RATING */
+
+.card p:first-of-type {
+    color: #f5a623;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   BUTTON AREA
+===================================================== */
+
+.btns {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+
+/* ALL BUTTONS */
+
+button {
+    flex: 1;
+
+    min-height: 42px;
+
+    border: none;
+    border-radius: 7px;
+
+    padding: 10px 14px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+
+/* BUTTON CLICK EFFECT */
+
+button:active {
+    transform: scale(0.96);
+}
+
+
+/* =====================================================
+   TRAILER BUTTON
+===================================================== */
+
+.trailer {
+    background: #181818;
+    color: white;
+}
+
+.trailer:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   BOOK BUTTON
+===================================================== */
+
+.book {
+    background: linear-gradient(
+        135deg,
+        #e50914,
+        #b20710
+    );
+
+    color: white;
+
+    box-shadow:
+        0 5px 12px rgba(229, 9, 20, 0.2);
+}
+
+.book:hover {
+    background: linear-gradient(
+        135deg,
+        #f20d19,
+        #c50711
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(229, 9, 20, 0.3);
+}
+
+
+/* =====================================================
+   BOOKING SECTION
+===================================================== */
+
+.booking {
+    display: none;
+
+    background: white;
+
+    margin-top: 40px;
+
+    padding: 35px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.1);
+
+    border-top: 4px solid #e50914;
+}
+
+
+/* BOOKING TITLE */
+
+.booking h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #222;
+}
+
+
+/* LABEL */
+
+.booking label {
+    display: block;
+
+    margin-top: 14px;
+    margin-bottom: 5px;
+
+    color: #444;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* INPUT AND SELECT */
+
+.booking input,
+.booking select {
+    width: 100%;
+
+    height: 46px;
+
+    padding: 10px 14px;
+
+    margin: 5px 0 10px;
+
+    border: 1px solid #ddd;
+    border-radius: 7px;
+
+    background: #fafafa;
+    color: #333;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+
+/* INPUT FOCUS */
+
+.booking input:focus,
+.booking select:focus {
+    border-color: #e50914;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px rgba(229, 9, 20, 0.08);
+}
+
+
+/* =====================================================
+   PAYMENT
+===================================================== */
+
+.payment {
+    display: none;
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #ddd;
+}
+
+
+/* PAYMENT TITLE */
+
+.payment h2 {
+    color: #e50914;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    background: linear-gradient(
+        135deg,
+        #111,
+        #222
+    );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    margin-top: 50px;
+}
+
+
+/* FOOTER TITLE */
+
+footer h2 {
+    color: #e50914;
+
+    font-size: 26px;
+
+    margin-bottom: 10px;
+}
+
+
+/* FOOTER TEXT */
+
+footer p {
+    color: #aaa;
+
+    font-size: 14px;
+
+    margin: 6px 0;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    header {
+        padding: 14px 3%;
+    }
+
+    .search {
+        width: 35%;
+    }
+
+    .movies {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 15px 20px;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .city select {
+        padding: 8px;
+    }
+
+    .search {
+        width: 100%;
+        order: 3;
+    }
+
+    .search input {
+        height: 42px;
+    }
+
+    .banner {
+        height: 350px;
+    }
+
+    .banner h1 {
+        font-size: 32px;
+
+        padding: 18px 20px;
+
+        margin: 20px;
+    }
+
+    .container {
+        width: 94%;
+        padding: 40px 0;
+    }
+
+    .container h2 {
+        font-size: 26px;
+    }
+
+    .movies {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .card {
+        border-radius: 12px;
+    }
+
+    .card img {
+        height: 240px;
+    }
+
+    .card-content {
+        padding: 12px;
+    }
+
+    .card h3 {
+        font-size: 17px;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
+
+    .btns {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .booking {
+        padding: 22px;
+    }
+
+    footer {
+        padding: 30px 15px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .movies {
+        grid-template-columns: 1fr;
+    }
+
+    .card img {
+        height: 350px;
+    }
+
+    .banner h1 {
+        font-size: 27px;
+    }
+
+}
